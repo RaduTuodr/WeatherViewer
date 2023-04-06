@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 public class WeatherController {
 
     @Autowired
@@ -17,14 +18,14 @@ public class WeatherController {
         return weatherRepository.save(weather);
     }
 
-    @GetMapping("/weather/{weatherId}")
-    public Weather getWeather(@PathVariable("weatherId") String weatherId) {
+    @GetMapping("/weather/{id}")
+    public Weather getWeather(@PathVariable("id") String weatherId) {
 
         return weatherRepository.getWeatherById(weatherId);
     }
 
-    @DeleteMapping("/weather/{weatherId}")
-    public String deleteWeather(@PathVariable("weatherId") String weatherId) {
+    @DeleteMapping("/weather/{id}")
+    public String deleteWeather(@PathVariable("id") String weatherId) {
 
         return weatherRepository.delete(weatherId);
     }
