@@ -30,8 +30,8 @@ public class WeatherController {
         return weatherRepository.delete(weatherId);
     }
 
-    @PutMapping("weather/{weatherId}")
-    public String updateWeather(@PathVariable("weatherId") String weatherId, @RequestBody Weather weather) {
+    @PutMapping("weather/{id}")
+    public String updateWeather(@PathVariable("id") String weatherId, @RequestBody Weather weather) {
 
         return weatherRepository.update(weatherId, weather);
     }
