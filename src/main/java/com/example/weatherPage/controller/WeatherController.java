@@ -1,7 +1,9 @@
 package com.example.weatherPage.controller;
 
+import com.example.weatherPage.converter.WeatherConverter;
 import com.example.weatherPage.model.Weather;
 import com.example.weatherPage.repository.WeatherRepository;
+import com.example.weatherPage.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,29 +12,13 @@ import org.springframework.web.bind.annotation.*;
 public class WeatherController {
 
     @Autowired
-    private WeatherRepository weatherRepository;
+    private WeatherService weatherService;
 
-    @PostMapping("/weather")
-    public Weather saveWeather(@RequestBody Weather weather) {
+    @GetMapping("/weather/{cityName}")
+    public Weather getWeather(@PathVariable("cityName") String cityName) {
 
-        return weatherRepository.save(weather);
-    }
-
-    @GetMapping("/weather/{id}")
-    public Weather getWeather(@PathVariable("id") String weatherId) {
-
-        return weatherRepository.getWeatherById(weatherId);
-    }
-
-    @DeleteMapping("/weather/{id}")
-    public String deleteWeather(@PathVariable("id") String weatherId) {
-
-        return weatherRepository.delete(weatherId);
-    }
-
-    @PutMapping("weather/{id}")
-    public String updateWeather(@PathVariable("id") String weatherId, @RequestBody Weather weather) {
-
-        return weatherRepository.update(weatherId, weather);
+        Weather weather = weatherService.getWeatherByCityName(cityName);
+        weatherService.save(weather);
+        return weather;
     }
 }
